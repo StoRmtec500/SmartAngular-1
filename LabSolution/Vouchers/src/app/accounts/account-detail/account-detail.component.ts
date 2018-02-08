@@ -50,28 +50,20 @@ export class AccountDetailComponent implements OnInit {
       { title: "Save Account", action: ACCOUNT_SAVE },
       { title: "Cancle", action: ACCOUNT_CANCEL }
     ]);
-    
+
     this.eb.Panel.subscribe((action: string) => {
       switch (action) {
         case ACCOUNT_CANCEL:
           this.router.navigate(["/accounts/"]);
           break;
-        case ACCOUNT_SAVE:
-          console.log("saving");
-          break;
+          case ACCOUNT_SAVE:
+        this.store.saveAccount(<BalanceAccount>this.acctForm.value);
+        break;
+      default:
+        console.log("invalid cmd in account details");
+        break;
       }
     });
-  }
-
-  evalAction(action: string) {
-    switch (action) {
-      case ACCOUNT_CANCEL:
-        this.router.navigate(["/accounts/"]);
-        break;
-      case ACCOUNT_SAVE:
-        console.log("saving");
-        break;
-    }
   }
 
   getAcct() {
@@ -87,13 +79,5 @@ export class AccountDetailComponent implements OnInit {
       Name: [this.account.Name],
       Expense: [this.account.Expense]
     });
-  }
-
-  saveAcct() {
-    if (this.account.ID == 0) {
-      this.service.insertAccount(this.account);
-    } else {
-      this.service.updateAccount(this.account);
-    }
   }
 }

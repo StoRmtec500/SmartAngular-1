@@ -77,4 +77,12 @@ export class DataStoreService {
     });
   }
 
+  saveAccount(account: BalanceAccount){
+    // if (this.account.ID == 0) {
+    //   this.service.insertAccount(this.account);
+    // } else {
+    //   this.service.updateAccount(this.account);
+  // }
+  }
+
 }
